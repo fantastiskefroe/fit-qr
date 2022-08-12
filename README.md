@@ -1,4 +1,4 @@
-# spir-qr
+# fit-qr
 
 ## Project setup
 ```

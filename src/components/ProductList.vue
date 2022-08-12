@@ -59,7 +59,7 @@ export default defineComponent({
       }
     },
     async fetchAll(): Promise<Product[]> {
-      const data = await fetch('https://products.spir.fantastiskefroe.dk/')
+      const data = await fetch('https://products.it.fantastiskefroe.dk/')
           .then(value => value.json())
           .then((data: ProductDTO[]) => data);
 

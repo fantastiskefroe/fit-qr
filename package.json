@@ -1,5 +1,5 @@
 {
-  "name": "spir-qr",
+  "name": "fit-qr",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@sentry/tracing": "^7.9.0",
-    "@sentry/vue": "^7.9.0",
+    "@sentry/tracing": "^7.10.0",
+    "@sentry/vue": "^7.10.0",
     "bootstrap": "^5.2.0",
     "core-js": "^3.24.1",
     "qrcode": "^1.5.1",
@@ -19,15 +19,15 @@
     "@types/qrcode": "^1.4.2",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
-    "@vue/cli-plugin-babel": "~5.0.8",
-    "@vue/cli-plugin-eslint": "~5.0.8",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-typescript": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
-    "@vue/eslint-config-typescript": "^10.0.0",
+    "@vue/eslint-config-typescript": "^11.0.0",
     "eslint": "^8.21.0",
-    "eslint-plugin-vue": "^8.0.1",
+    "eslint-plugin-vue": "^9.3.0",
     "sass": "^1.54.4",
     "sass-loader": "^13.0.2",
-    "typescript": "~4.7.4"
+    "typescript": "^4.7.4"
   }
 }

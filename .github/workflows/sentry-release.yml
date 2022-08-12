@@ -9,7 +9,7 @@ jobs:
   build_and_release:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: spir-qr
+      IMAGE_NAME: fit-qr
     steps:
       - name: Checkout
         uses: actions/checkout@v3
