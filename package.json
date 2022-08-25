@@ -11,7 +11,7 @@
     "@sentry/tracing": "^7.11.1",
     "@sentry/vue": "^7.11.1",
     "bootstrap": "^5.2.0",
-    "core-js": "^3.24.1",
+    "core-js": "^3.25.0",
     "qrcode": "^1.5.1",
     "vue": "^3.2.37"
   },
