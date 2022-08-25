@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@sentry/tracing": "^7.11.1",
-    "@sentry/vue": "^7.10.0",
+    "@sentry/vue": "^7.11.1",
     "bootstrap": "^5.2.0",
-    "core-js": "^3.24.1",
+    "core-js": "^3.25.0",
     "qrcode": "^1.5.1",
     "vue": "^3.2.37"
   },
@@ -26,7 +26,7 @@
     "@vue/eslint-config-typescript": "^11.0.0",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
-    "sass": "^1.54.4",
+    "sass": "^1.54.5",
     "sass-loader": "^13.0.2",
     "typescript": "^4.7.4"
   }
