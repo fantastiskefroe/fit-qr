@@ -59,14 +59,14 @@ export default defineComponent({
       }
     },
     async fetchAll(): Promise<Product[]> {
-      const data = await fetch('https://products.it.fantastiskefroe.dk/')
+      const data = await fetch('https://products.it.fantastiskefroe.dk/products')
           .then(value => value.json())
           .then((data: ProductDTO[]) => data);
 
       return Promise.resolve(data.map(this.toProduct));
     },
     toProduct(source: ProductDTO): Product {
-      const variants: Variant[] = Object.values(source.variants)
+      const variants: Variant[] = source.variants
           .map(variantDTO => {
             return {
               id: variantDTO.id,
@@ -93,7 +93,7 @@ export default defineComponent({
     },
     loadFromCache(): { timestamp: number, productList: Product[] } {
       const data = window.localStorage.getItem('productList');
-      if (data === null) {
+      if (data == null) {
         return {
           timestamp: 0,
           productList: []

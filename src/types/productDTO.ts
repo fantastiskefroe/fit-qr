@@ -6,5 +6,5 @@ export interface ProductDTO {
     handle: string;
     url: string;
     imageUrl: string;
-    variants: Record<string, VariantDTO>;
+    variants: VariantDTO[];
 }
