@@ -13,7 +13,7 @@
     "bootstrap": "^5.2.3",
     "core-js": "^3.27.2",
     "qrcode": "^1.5.1",
-    "vue": "^3.2.45"
+    "vue": "^3.2.47"
   },
   "devDependencies": {
     "@types/qrcode": "^1.5.0",
