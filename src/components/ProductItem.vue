@@ -1,16 +1,32 @@
 <template>
-  <img :src="product.imgUrl" loading="lazy" :alt="product.title + 'thumbnail'">
-  <div class="d-flex flex-column align-items-center">
-    <span v-html="highlightedTitle"></span>
-    <span class="small fst-italic text-muted" v-html="highlightedSkus"></span>
+  <div class="row align-items-center">
+    <div class="col-2 text-center">
+      <img :src="product.imgUrl" loading="lazy" width="64" :alt="product.title + 'thumbnail'">
+    </div>
+    <div class="col-6">
+      <div class="d-flex flex-column">
+        <span v-html="highlightedTitle"></span>
+        <span class="small fst-italic text-muted" v-html="highlightedSkus"></span>
+      </div>
+    </div>
+    <div class="col text-end">
+      <div class="btn-group-vertical btn-group-sm" role="group" aria-label="Vertical button group">
+        <button v-for="variant in product.variants" :key="variant.id"
+                @click="download(product, variant)"
+                type="button"
+                class="btn btn-primary">
+          {{ variant.title }}
+        </button>
+      </div>
+    </div>
   </div>
-  <span @click="download(product.url)" class="btn btn-primary">Download</span>
 </template>
 
 <script lang="ts">
 import {defineComponent, PropType} from 'vue';
 import QRCode from 'qrcode';
 import {Product} from '@/types/product';
+import {Variant} from "@/types/variant";
 
 export default defineComponent({
   name: 'ProductItem',
@@ -35,19 +51,10 @@ export default defineComponent({
       return skuString.replaceAll(new RegExp(this.highlight, 'gi'), '<b>$&</b>');
     }
   }, methods: {
-    qr(inputString: string, width?: number): Promise<string> {
-      return QRCode.toString(inputString, {
-        type: 'svg',
-        errorCorrectionLevel: 'H',
-        margin: 0,
-        color: {
-          dark: '#000000FF',
-          light: '#FFFFFF00'
-        },
-        width
-      });
+    async download(product: Product, variant: Variant): Promise<void> {
+      return this.downloadQrWithInput(`${product.url}?variant=${variant.id}`);
     },
-    async download(inputString: string): Promise<void> {
+    async downloadQrWithInput(inputString: string): Promise<void> {
       if (!inputString) {
         return;
       }
@@ -67,12 +74,23 @@ export default defineComponent({
     },
     generateFileName(inputString: string): string {
       const split = inputString.split('/');
-
       return split[split.length - 1] + '-qr.svg';
+    },
+    async qr(inputString: string, width?: number): Promise<string> {
+      return QRCode.toString(inputString, {
+        type: 'svg',
+        errorCorrectionLevel: 'H',
+        margin: 0,
+        color: {
+          dark: '#000000FF',
+          light: '#FFFFFF00'
+        },
+        width
+      });
     },
     generateObjectURL(data: string): string {
       return window.URL.createObjectURL(new Blob([data]));
-    }
+    },
   }
 });
 </script>

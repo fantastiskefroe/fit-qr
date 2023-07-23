@@ -9,7 +9,7 @@
 
   <ul class="list-group">
     <li v-for="product in filteredProductList" :key="product.id"
-        class="list-group-item d-flex justify-content-between align-items-center">
+        class="list-group-item">
       <ProductItem :product="product" :highlight="searchQuery.toLowerCase()"></ProductItem>
     </li>
   </ul>
@@ -21,6 +21,7 @@ import {Product} from '@/types/product';
 import ProductItem from '@/components/ProductItem.vue';
 import {ProductDTO} from '@/types/productDTO';
 import {Variant} from '@/types/variant';
+import {VariantDTO} from "@/types/VariantDTO";
 
 export default defineComponent({
   name: 'ProductList',
@@ -59,28 +60,26 @@ export default defineComponent({
       }
     },
     async fetchAll(): Promise<Product[]> {
-      const data = await fetch('https://products.it.fantastiskefroe.dk/products')
+      return fetch('https://products.it.fantastiskefroe.dk/products')
           .then(value => value.json())
-          .then((data: ProductDTO[]) => data);
-
-      return Promise.resolve(data.map(this.toProduct));
+          .then(data => data.map(this.toProduct));
     },
     toProduct(source: ProductDTO): Product {
-      const variants: Variant[] = source.variants
-          .map(variantDTO => {
-            return {
-              id: variantDTO.id,
-              sku: variantDTO.sku,
-              inventory: variantDTO.inventory,
-            };
-          });
-
       return {
         id: source.id,
         title: source.title,
         url: source.url,
         imgUrl: source.imageUrl,
-        variants: variants
+        variants: source.variants
+            .map(variantDTO => this.mapVariant(variantDTO))
+      };
+    },
+    mapVariant(source: VariantDTO): Variant {
+      return {
+        id: source.id,
+        title: source.title === 'Default Title' ? 'Download' : source.title,
+        sku: source.sku,
+        inventory: source.inventory,
       };
     },
     saveToCache(productList: Product[]): void {
