@@ -52,14 +52,19 @@ export default defineComponent({
     }
   }, methods: {
     async download(product: Product, variant: Variant): Promise<void> {
-      return this.downloadQrWithInput(`${product.url}?variant=${variant.id}`);
+      return this.downloadQrWithInput(
+          `${product.url}?variant=${variant.id}`,
+          this.generateFileName(product, variant)
+      );
     },
-    async downloadQrWithInput(inputString: string): Promise<void> {
+    generateFileName(product: Product, variant: Variant): string {
+      return `${variant.sku}-qr.svg`;
+    },
+    async downloadQrWithInput(inputString: string, fileName: string): Promise<void> {
       if (!inputString) {
         return;
       }
 
-      const fileName = this.generateFileName(inputString);
       const objectUrl = this.generateObjectURL(await this.qr(inputString, 45.354));
 
       // Create and activate link element
@@ -72,10 +77,7 @@ export default defineComponent({
       el.remove();
       window.URL.revokeObjectURL(objectUrl);
     },
-    generateFileName(inputString: string): string {
-      const split = inputString.split('/');
-      return split[split.length - 1] + '-qr.svg';
-    },
+
     async qr(inputString: string, width?: number): Promise<string> {
       return QRCode.toString(inputString, {
         type: 'svg',

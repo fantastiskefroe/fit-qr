@@ -77,7 +77,7 @@ export default defineComponent({
     mapVariant(source: VariantDTO): Variant {
       return {
         id: source.id,
-        title: source.title === 'Default Title' ? 'Download' : source.title,
+        title: source.title,
         sku: source.sku,
         inventory: source.inventory,
       };
