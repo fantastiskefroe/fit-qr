@@ -4,15 +4,9 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-      day: "monday"
-      time: "06:00"
-      timezone: "Europe/Copenhagen"
+      interval: daily
 
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
-      day: "monday"
-      time: "06:00"
-      timezone: "Europe/Copenhagen"
+      interval: daily
