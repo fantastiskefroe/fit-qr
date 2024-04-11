@@ -10,13 +10,13 @@
       </div>
     </div>
     <div class="col text-end">
-      <div class="btn-group-vertical btn-group-sm" role="group" aria-label="Vertical button group">
-        <button v-for="variant in product.variants" :key="variant.id"
-                @click="download(product, variant)"
-                type="button"
-                class="btn btn-primary">
-          {{ variant.title }}
-        </button>
+      <div class="btn-group-vertical btn-group-sm" >
+          <button v-for="variant in product.variants" :key="variant.id"
+                  @click="download(product, variant)"
+                  type="button"
+                  class="btn btn-primary">
+            {{ variant.title }}
+          </button>
       </div>
     </div>
   </div>
@@ -49,11 +49,11 @@ export default defineComponent({
       }
 
       return skuString.replaceAll(new RegExp(this.highlight, 'gi'), '<b>$&</b>');
-    }
+    },
   }, methods: {
     async download(product: Product, variant: Variant): Promise<void> {
       return this.downloadQrWithInput(
-          `${product.url}?variant=${variant.id}`,
+          `https://qr.fantastiskefroe.dk/qr/${product.id}/${variant.id}`,
           this.generateFileName(product, variant)
       );
     },
